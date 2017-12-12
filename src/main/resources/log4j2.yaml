@@ -1,0 +1,104 @@
+Configutation:
+  status: warn
+
+  Properties:
+    Property:
+    - name: logger-name
+      value: com.botscrew.facebook
+    - name: log-pattern
+      value: "[%-5p] %d{ISO8601} [%t] [%c{3}] %m%n"
+    - name: to
+      value: your.email@botscrew.com #todo: set your email to receive messages about errors
+    - name: from
+      value: botty.test.mail@gmail.com
+    - name: username
+      value: botty.test.mail
+    - name: password
+      value: bali1234
+    - name: host
+      value: smtp.gmail.com
+    - name: port
+      value: 465
+
+
+  Appenders:
+
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: ${log-pattern}
+
+    RollingFile:
+      - name: All_Data_Appender
+        fileName: logs/temp/bot_all.log
+        filePattern: "logs/$${date:yyyy-MM}/all/bot_all.log.%d{yyyy-MM-dd}.gz"
+        PatternLayout:
+          Pattern: ${log-pattern}
+        policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+            modulate: true
+      - name: Info_Appender
+        fileName: logs/temp/bot_info.log
+        filePattern: "logs/$${date:yyyy-MM}/info/bot_info.log.%d{yyyy-MM-dd}.gz"
+        PatternLayout:
+          Pattern: ${log-pattern}
+        policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+            modulate: true
+      - name: Error_Appender
+        fileName: logs/temp/bot_error.log
+        filePattern: "logs/$${date:yyyy-MM}/error/bot_error.log.%d{yyyy-MM-dd}.gz"
+        PatternLayout:
+          Pattern: ${log-pattern}
+        policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+            modulate: true
+
+    SMTP:
+      name: Mailer
+      subject: Bot error
+      to: ${to}
+      from: ${from}
+      smtpHost: ${host}
+      smtpPort: ${port}
+      smtpProtocol: smtps
+      smtpUsername: ${username}
+      smtpPassword: ${password}
+      smtpDebug: false
+      bufferSize: 20
+      ThresholdFilter:
+        level: DEBUG
+        onMatch: NEUTRAL
+        onMismatch: DENY
+      PatternLayout:
+        Pattern: ${log-pattern}
+
+    Async:
+      name: AsyncMailer
+      AppenderRef:
+        ref: Mailer
+
+  Loggers:
+    Root:
+        level: error
+        additivity: false
+        AppenderRef:
+          - ref: Console_Appender
+            level: info
+          - ref: AsyncMailer
+            level: error
+    Logger:
+        - name: ${logger-name}
+          additivity: true
+          level: trace
+          AppenderRef:
+            - ref: All_Data_Appender
+              level: trace
+            - ref: Info_Appender
+              level: info
+            - ref: Error_Appender
+              level: error
