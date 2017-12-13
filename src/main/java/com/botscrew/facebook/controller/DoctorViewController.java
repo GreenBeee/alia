@@ -1,12 +1,10 @@
 package com.botscrew.facebook.controller;
 
-import com.botscrew.facebook.entity.User;
 import com.botscrew.facebook.model.Doctor;
 import com.botscrew.facebook.service.Docfinder;
 import com.botscrew.framework.flow.model.GeoCoordinates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

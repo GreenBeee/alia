@@ -47,10 +47,10 @@ public class InitializationService {
 
     @Transactional
     private void tryToRefreshWelcomeMessage() {
-        if (refreshWelcomeMessage) {
-            restTemplate.postForObject(welcomeMessageUrl + token,
-                    WelcomeMessageRequest.getFullRequest(Payload.GET_STARTED), String.class);
-        }
+        StartedButtonRequest request = new StartedButtonRequest();
+        request.setGetStarted(new GetStartedButton(Postbacks.INIT));
+        restTemplate.postForObject(getStartedButtonURL + token, request,
+                StartedButtonRequest.class);
     }
 
     private void setMenu() {
@@ -79,13 +79,4 @@ public class InitializationService {
         restTemplate.postForObject(WHITELISTING_URL + token, domainWhiteList, String.class);
 
     }
-    @PostConstruct
-    public void setGetStartedButton(){
-        StartedButtonRequest request = new StartedButtonRequest();
-        request.setGetStarted(new GetStartedButton(Postbacks.INIT));
-        restTemplate.postForObject(getStartedButtonURL + token, request,
-                StartedButtonRequest.class);
-    }
-
-
 }

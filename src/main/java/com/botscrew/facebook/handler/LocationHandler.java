@@ -13,7 +13,6 @@ import com.botscrew.facebook.service.UserService;
 import com.botscrew.framework.flow.annotation.*;
 import com.botscrew.framework.flow.model.GeoCoordinates;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Map;
