@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <style>
+       #map {
+        height: 180px;
+        width: 100%;
+        margin-bottom: 10px;
+       }
+       .tableColumn{
+        padding-left:10px;
+       }
+    </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script async="async"
+            defer="defer"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXMX-HpMDrhNVta-66qi6hl9FwglLdQXw&amp;callback=initMap">
+    </script>
+    <script th:inline="javascript">
+      function initMap() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+
+        var doctorCoordinates = {lat: [[${doctor.latitude}]], lng: [[${doctor.longitude}]]};
+        var userCoordinates = {lat: [[${userLatitude}]], lng: [[${userLongitude}]]};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: doctorCoordinates
+        });
+        var marker = new google.maps.Marker({
+          position: doctorCoordinates,
+          map: map
+        });
+        directionsDisplay.setMap(map);
+
+        var onChangeHandler = function() {
+          calculateAndDisplayRoute(directionsService, directionsDisplay);
+        };
+
+        document.getElementById('directionButton').addEventListener('click', onChangeHandler);
+      }
+
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var url = 'https://www.google.com.ua/maps/dir/' + [[${userLatitude}]] + ',' +[[${userLongitude}]] + '/'
+        + [[${doctor.latitude}]] + ',' + [[${doctor.longitude}]];
+        window.open(url);
+
+        /*var docCoord = [[${doctor.latitude}]] + ',' + [[${doctor.longitude}]];
+        var userCoord = [[${userLatitude}]] + ',' + [[${userLongitude}]];
+        directionsService.route({
+          origin: userCoord,
+          destination: docCoord,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });*/
+    }
+    </script>
+</head>
+
+<body>
+<div id="map"></div>
+
+<div class="container">
+    <p><b>Name: <br></br><span th:text="${doctor.name}" style="font-size:18px;"></span></b>
+        <span th:text="${doctor.practice}" style="font-size:10px" class="text-success">
+        </span>
+        <span style="color:green;" class="glyphicon glyphicon-ok-sign">
+        </span>
+    </p>
+    <p style="float:right;"><b>Distance:</b><br></br>
+        <span class="text-muted" style="font-size:16px;float:right;"><span th:text="${doctor.distance}"></span> m</span>
+    </p>
+    <p><b>Address:</b><br></br>
+        <span class="text-muted">
+        <span th:text="${doctor.address1}"></span>,<br></br>
+        <span th:text="${doctor.city}"></span>
+        <span th:text="${doctor.postcode}"></span>
+    </span>
+    </p>
+    <p><b>Phone:</b><br></br>
+        <span class="text-muted"><span th:text="${doctor.phone}"></span></span>
+    </p>
+    <p><b>Hours:</b></p>
+    <table style="margin-bottom:-10px;">
+        <tr>
+            <td class="text-muted">
+                Monday
+            </td>
+            <td class="tableColumn"><span class="tableSpan" th:text="${doctor.monday}"></span></td>
+        </tr>
+        <tr>
+            <td class="text-muted">
+                Tuesday
+            </td>
+            <td class="tableColumn"><span th:text="${doctor.tuesday}"></span></td>
+        </tr>
+        <tr>
+            <td class="text-muted">
+                Wednesday
+            </td>
+            <td style="padding-left:10px;"><span th:text="${doctor.wednesday}"></span></td>
+        </tr>
+        <tr>
+            <td class="text-muted">
+                Thursday
+            </td>
+            <td class="tableColumn"><span th:text="${doctor.thursday}"></span></td>
+        </tr>
+        <tr>
+            <td class="text-muted">
+                Friday
+            </td>
+            <td class="tableColumn"><span th:text="${doctor.friday}"></span></td>
+        </tr>
+        <tr>
+            <td class="text-muted">
+                Saturday
+            </td>
+            <td class="tableColumn"><span th:text="${doctor.saturday}"></span></td>
+        </tr>
+        <tr>
+            <td class="text-muted">
+                Sunday
+            </td>
+            <td class="tableColumn"><span th:text="${doctor.sunday}"></span></td>
+        </tr>
+    </table>
+    <hr/>
+    <button id="directionButton" type="button" class="btn btn-primary btn-block">Get Directions</button>
+</div>
+
+</body>
+</html>
