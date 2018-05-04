@@ -46,7 +46,7 @@ public class InitializationService {
 
 
     @Transactional
-    private void tryToRefreshWelcomeMessage() {
+    public void tryToRefreshWelcomeMessage() {
         StartedButtonRequest request = new StartedButtonRequest();
         request.setGetStarted(new GetStartedButton(Postbacks.INIT));
         restTemplate.postForObject(getStartedButtonURL + token, request,
@@ -77,7 +77,6 @@ public class InitializationService {
         domainWhiteList.addDomain(policyUrl);
         domainWhiteList.setAddActionType();
         String s = restTemplate.postForObject(WHITELISTING_URL + token, domainWhiteList, String.class);
-        System.out.println(s);
 
     }
 }

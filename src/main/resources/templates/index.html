@@ -1,8 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<<<<<<< HEAD
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+=======
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+>>>>>>> 79d973c443cf5c05304ba69804f26d544d022104
     <style>
        #map {
         height: 180px;
@@ -14,7 +19,11 @@
        }
     </style>
 
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+=======
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+>>>>>>> 79d973c443cf5c05304ba69804f26d544d022104
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -73,23 +82,40 @@
 <div id="map"></div>
 
 <div class="container">
+<<<<<<< HEAD
     <p><b>Name: <br></br><span th:text="${doctor.name}" style="font-size:18px;"></span></b>
+=======
+    <p><b>Name: <br/><span th:text="${doctor.name}" style="font-size:18px;"></span></b>
+>>>>>>> 79d973c443cf5c05304ba69804f26d544d022104
         <span th:text="${doctor.practice}" style="font-size:10px" class="text-success">
         </span>
         <span style="color:green;" class="glyphicon glyphicon-ok-sign">
         </span>
     </p>
+<<<<<<< HEAD
     <p style="float:right;"><b>Distance:</b><br></br>
         <span class="text-muted" style="font-size:16px;float:right;"><span th:text="${doctor.distance}"></span> m</span>
     </p>
     <p><b>Address:</b><br></br>
         <span class="text-muted">
         <span th:text="${doctor.address1}"></span>,<br></br>
+=======
+    <p style="float:right;"><b>Distance:</b><br/>
+        <span class="text-muted" style="font-size:16px;float:right;"><span th:text="${doctor.distance}"></span> m</span>
+    </p>
+    <p><b>Address:</b><br/>
+        <span class="text-muted">
+        <span th:text="${doctor.address1}"></span>,<br/>
+>>>>>>> 79d973c443cf5c05304ba69804f26d544d022104
         <span th:text="${doctor.city}"></span>
         <span th:text="${doctor.postcode}"></span>
     </span>
     </p>
+<<<<<<< HEAD
     <p><b>Phone:</b><br></br>
+=======
+    <p><b>Phone:</b><br/>
+>>>>>>> 79d973c443cf5c05304ba69804f26d544d022104
         <span class="text-muted"><span th:text="${doctor.phone}"></span></span>
     </p>
     <p><b>Hours:</b></p>
